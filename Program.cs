@@ -6,66 +6,118 @@ namespace ConsoleApp
     {
         static void Main(string[] args)
         {
+            //-----------------------------------
             //string name;
             //Console.Write("Enter your name: ");
             //name = Console.ReadLine();
             //Console.WriteLine(FormatString(name));
             //Console.Read();
+            //-----------------------------------
 
-            string day;
-            string month;
-            string year;
-            Console.Write("Enter day: ");
-            day = Console.ReadLine();
-            Console.Write("Enter month: ");
-            month = Console.ReadLine();
-            Console.Write("Enter year: ");
-            year = Console.ReadLine();
+            //-----------------------------------
+            //string day;
+            //string month;
+            //string year;
+            //Console.Write("Enter day: ");
+            //day = Console.ReadLine();
+            //Console.Write("Enter month: ");
+            //month = Console.ReadLine();
+            //Console.Write("Enter year: ");
+            //year = Console.ReadLine();
 
-            //GetLeapYearAndDayOfWeek(Convert.ToInt32(day), Convert.ToInt32(month), Convert.ToInt32(year));
-            var arr1 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 1);
-            var strOutput1 = "";
-            for (int i = 0; i < arr1.Length; i++)
+            ////GetLeapYearAndDayOfWeek(Convert.ToInt32(day), Convert.ToInt32(month), Convert.ToInt32(year));
+            //var arr1 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 1);
+            //var strOutput1 = "";
+            //for (int i = 0; i < arr1.Length; i++)
+            //{
+            //    strOutput1 = strOutput1 + arr1[i].ToString() + "   ";
+            //}
+
+            //var arr2 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 2);
+            //var strOutput2 = "";
+            //for (int i = 0; i < arr2.Length; i++)
+            //{
+            //    strOutput2 = strOutput2 + arr2[i].ToString() + "   ";
+            //}
+
+            //var arr3 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 3);
+            //var strOutput3 = "";
+            //for (int i = 0; i < arr3.Length; i++)
+            //{
+            //    strOutput3 = strOutput3 + arr3[i].ToString() + "   ";
+            //}
+
+            //var arr4 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 4);
+            //var strOutput4 = "";
+            //for (int i = 0; i < arr4.Length; i++)
+            //{
+            //    strOutput4 = strOutput4 + arr4[i].ToString() + "   ";
+            //}
+
+            //var arr5 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 5);
+            //var strOutput5 = "";
+            //for (int i = 0; i < arr5.Length; i++)
+            //{
+            //    strOutput5 = strOutput5 + arr5[i].ToString() + "   ";
+            //}
+
+            //var arr6 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 6);
+            //var strOutput6 = "";
+            //for (int i = 0; i < arr6.Length; i++)
+            //{
+            //    strOutput6 = strOutput6 + arr6[i].ToString() + "   ";
+            //}
+
+            //Console.WriteLine(strOutput1 + "\r\n" + strOutput2 + "\r\n" + strOutput3 + "\r\n" + strOutput4 + "\r\n" + strOutput5 + "\r\n" + strOutput6);
+            //------------------------------------
+
+            int pageSize;
+            int pageCount = 3;
+            int curPage = 1;
+
+            Console.Write("Page Size: ");
+            pageSize = Convert.ToInt32(Console.ReadLine());
+            Console.Write("Current Page: ");
+            curPage = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine();
+
+            int[] arr = { 0,12345,13,383222,600,1020,2,44236,458,999, 1000,124,118,12345,13,3365,600,1020,2,44236, 458,999,1000,124 };
+            //int[] arr = { };            
+
+            // Tính ra số trang tối đa được sinh ra
+            int maxPage = (arr.Length / pageSize) + 1;
+
+            // In so danh sách các phần tử theo CurrentPage 
+            for (int i = (curPage - 1) *  pageSize; i < curPage * pageSize; i++)
             {
-                strOutput1 = strOutput1 + arr1[i].ToString() + "   ";
+                if (i >= arr.Length)
+                {
+                    break;
+                }
+                Console.WriteLine("[" + (i < 10 ? "0" + i.ToString() : i.ToString()) + "]" + "= " + arr[i]);                
             }
+            Console.WriteLine();
 
-            var arr2 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 2);
-            var strOutput2 = "";
-            for (int i = 0; i < arr2.Length; i++)
+            // Tạo ra pagination UI
+            string lstBtn = "";
+            for (int i = 1; i <= maxPage; i++)
             {
-                strOutput2 = strOutput2 + arr2[i].ToString() + "   ";
+                if (curPage == 1 && i <= pageCount)
+                {
+                    lstBtn += i + " ";
+                }
+                if (curPage == maxPage && i > curPage - pageCount && maxPage > 1)
+                {
+                    lstBtn += i + " ";
+                }
+                if (curPage > 1 && curPage < maxPage && i >= curPage - pageCount / 2 && i <= curPage + pageCount / 2)
+                {
+                    lstBtn += i + " ";
+                }
             }
+            lstBtn = lstBtn.Substring(0, lstBtn.Length - 1);
 
-            var arr3 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 3);
-            var strOutput3 = "";
-            for (int i = 0; i < arr3.Length; i++)
-            {
-                strOutput3 = strOutput3 + arr3[i].ToString() + "   ";
-            }
-
-            var arr4 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 4);
-            var strOutput4 = "";
-            for (int i = 0; i < arr4.Length; i++)
-            {
-                strOutput4 = strOutput4 + arr4[i].ToString() + "   ";
-            }
-
-            var arr5 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 5);
-            var strOutput5 = "";
-            for (int i = 0; i < arr5.Length; i++)
-            {
-                strOutput5 = strOutput5 + arr5[i].ToString() + "   ";
-            }
-
-            var arr6 = GetCalendar1(Convert.ToInt32(month), Convert.ToInt32(year), 6);
-            var strOutput6 = "";
-            for (int i = 0; i < arr6.Length; i++)
-            {
-                strOutput6 = strOutput6 + arr6[i].ToString() + "   ";
-            }
-
-            Console.WriteLine(strOutput1 + "\r\n" + strOutput2 + "\r\n" + strOutput3 + "\r\n" + strOutput4 + "\r\n" + strOutput5 + "\r\n" + strOutput6);
+            Console.WriteLine("<< < {0} > >>", lstBtn);
 
             Console.Read();
         }
